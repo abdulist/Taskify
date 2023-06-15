@@ -11,6 +11,7 @@ import com.d3if3059.taskify.data.TaskDao
 import com.d3if3059.taskify.network.AboutApi
 import com.d3if3059.taskify.ui.ADD_TASK_RESULT_OK
 import com.d3if3059.taskify.ui.EDIT_TASK_RESULT_OK
+import com.d3if3059.taskify.ui.about.About
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.combine
@@ -26,17 +27,19 @@ class TasksViewModel @ViewModelInject constructor (
     init {
         retrieveData()
     }
+    fun getData(): LiveData<List<About>> = data
+    private val data = MutableLiveData<List<About>>()
 
     private fun retrieveData() {
         viewModelScope.launch (Dispatchers.IO) {
             try {
-                val result = AboutApi.service.getAbout()
-                Log.d("TasksViewModel", "Success: $result")
+                data.postValue(AboutApi.service.getAbout())
             } catch (e: Exception) {
                 Log.d("TasksViewModel", "Failure: ${e.message}")
             }
         }
     }
+
 
 
     val searchQuery = state.getLiveData("searchQuery","")
