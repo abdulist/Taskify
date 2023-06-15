@@ -1,5 +1,6 @@
 package com.d3if3059.taskify.ui.tasks
 
+import android.util.Log
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
@@ -7,8 +8,10 @@ import com.d3if3059.taskify.data.PreferencesManager
 import com.d3if3059.taskify.data.SortOrder
 import com.d3if3059.taskify.data.Task
 import com.d3if3059.taskify.data.TaskDao
+import com.d3if3059.taskify.network.AboutApi
 import com.d3if3059.taskify.ui.ADD_TASK_RESULT_OK
 import com.d3if3059.taskify.ui.EDIT_TASK_RESULT_OK
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
@@ -19,6 +22,22 @@ class TasksViewModel @ViewModelInject constructor (
     private val preferencesManager: PreferencesManager,
     @Assisted private val state: SavedStateHandle
 ) : ViewModel() {
+
+    init {
+        retrieveData()
+    }
+
+    private fun retrieveData() {
+        viewModelScope.launch (Dispatchers.IO) {
+            try {
+                val result = AboutApi.service.getAbout()
+                Log.d("TasksViewModel", "Success: $result")
+            } catch (e: Exception) {
+                Log.d("TasksViewModel", "Failure: ${e.message}")
+            }
+        }
+    }
+
 
     val searchQuery = state.getLiveData("searchQuery","")
 
@@ -94,6 +113,8 @@ class TasksViewModel @ViewModelInject constructor (
         data class ShowTAskSavedConfirmationMessage(val msg: String) : TasksEvent()
         object NavigateToDeleteAllCompletedScreen : TasksEvent()
     }
+
+
 
 }
 
