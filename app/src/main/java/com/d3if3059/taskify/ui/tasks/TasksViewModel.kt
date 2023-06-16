@@ -1,6 +1,5 @@
 package com.d3if3059.taskify.ui.tasks
 
-import android.util.Log
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
@@ -8,40 +7,19 @@ import com.d3if3059.taskify.data.PreferencesManager
 import com.d3if3059.taskify.data.SortOrder
 import com.d3if3059.taskify.data.Task
 import com.d3if3059.taskify.data.TaskDao
-import com.d3if3059.taskify.network.AboutApi
 import com.d3if3059.taskify.ui.ADD_TASK_RESULT_OK
 import com.d3if3059.taskify.ui.EDIT_TASK_RESULT_OK
-import com.d3if3059.taskify.ui.about.About
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+
 class TasksViewModel @ViewModelInject constructor (
     private val taskDao: TaskDao,
     private val preferencesManager: PreferencesManager,
     @Assisted private val state: SavedStateHandle
 ) : ViewModel() {
-
-    init {
-        retrieveData()
-    }
-    fun getData(): LiveData<List<About>> = data
-    private val data = MutableLiveData<List<About>>()
-
-    private fun retrieveData() {
-        viewModelScope.launch (Dispatchers.IO) {
-            try {
-                data.postValue(AboutApi.service.getAbout())
-            } catch (e: Exception) {
-                Log.d("TasksViewModel", "Failure: ${e.message}")
-            }
-        }
-    }
-
-
-
     val searchQuery = state.getLiveData("searchQuery","")
 
     val preferencesFlow = preferencesManager.preferencesFlow
@@ -99,7 +77,7 @@ class TasksViewModel @ViewModelInject constructor (
         }
     }
 
-    fun showTaskSavedConfirmationMessage(text: String) = viewModelScope.launch {
+    private fun showTaskSavedConfirmationMessage(text: String) = viewModelScope.launch {
         taskEventChannel.send(TasksEvent.ShowTAskSavedConfirmationMessage(text))
     }
 

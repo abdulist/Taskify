@@ -17,6 +17,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
+        android:gravity="center_vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.082" />
@@ -32,6 +33,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center_vertical"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/logo"
@@ -41,6 +43,7 @@
     <TextView
         android:id="@+id/appVersion"
         android:layout_width="wrap_content"
+        android:gravity="center_vertical"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
@@ -49,7 +52,8 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35" />
+        app:layout_constraintVertical_bias="0.35"
+        tools:text="Version 1.0" />
 
     <TextView
         android:id="@+id/licenseTitle"
@@ -59,24 +63,24 @@
         android:text="@string/text_about_title"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
         android:textStyle="bold"
+        android:gravity="center_vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.022"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appVersion"
-        app:layout_constraintVertical_bias="0.035" />
+        app:layout_constraintVertical_bias="0.03" />
 
     <TextView
-        android:id="@+id/license"
-        android:layout_width="395dp"
-        android:layout_height="58dp"
-        android:layout_marginEnd="8dp"
+        android:id="@+id/desc"
+        android:layout_width="361dp"
+        android:layout_height="75dp"
         android:fontFamily="@font/abel"
+        android:gravity="center_vertical"
         android:text="@string/text_about_desc"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/licenseTitle"
         app:layout_constraintVertical_bias="0.0"
@@ -93,24 +97,51 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.021"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/license"
-        app:layout_constraintVertical_bias="0.071" />
+        app:layout_constraintTop_toBottomOf="@id/desc"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/visitURL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/abel"
+        android:gravity="center_vertical"
         android:text="@string/text_about_visit_url"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
         android:textColor="#1976D2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.661" />
+
+    <TextView
+        android:id="@+id/license"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_extrabold"
+        android:text="@string/license"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center_vertical"
+        app:layout_constraintVertical_bias="0.848" />
+
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="180dp"
+        android:text="@string/author"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,8 @@
     <string name="text_app_version">v%s (%d)</string>
     <string name="important_task">Important Task?</string>
     <string name="task_name">Task name</string>
+    <string name="license">license</string>
+    <string name="author">author</string>
 
 
 </resources>

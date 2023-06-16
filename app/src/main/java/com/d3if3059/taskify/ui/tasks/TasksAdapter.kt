@@ -10,7 +10,6 @@ import com.d3if3059.taskify.data.Task
 import com.d3if3059.taskify.databinding.ItemTaskBinding
 
 class TasksAdapter(private val listener: OnItemClickListener): ListAdapter<Task,TasksAdapter.TasksViewHolder> (DiffCallback()){
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TasksViewHolder {
         val binding = ItemTaskBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return TasksViewHolder(binding)
@@ -22,8 +21,6 @@ class TasksAdapter(private val listener: OnItemClickListener): ListAdapter<Task,
     }
 
    inner class TasksViewHolder(private val binding: ItemTaskBinding) : RecyclerView.ViewHolder(binding.root){
-
-
         init {
             binding.apply {
                 root.setOnClickListener {
@@ -53,7 +50,6 @@ class TasksAdapter(private val listener: OnItemClickListener): ListAdapter<Task,
                 labelPriority.isVisible = task.important
             }
         }
-
     }
 
     interface OnItemClickListener{

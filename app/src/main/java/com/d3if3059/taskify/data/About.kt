@@ -1,4 +1,4 @@
-package com.d3if3059.taskify.ui.about
+package com.d3if3059.taskify.data
 
 data class About(
     val author: String,

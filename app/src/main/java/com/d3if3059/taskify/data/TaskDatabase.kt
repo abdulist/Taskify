@@ -32,7 +32,6 @@ abstract class TaskDatabase : RoomDatabase() {
                 dao.insert(Task(name = "Kamu bisa klik task untuk mengedit ✍\uD83C\uDFFB "))
                 dao.insert(Task(name = "Task penting akan berada di urutan paling atas", important = true))
                 dao.insert(Task(name = "Ahmad Abdul Fatah\uD83C\uDFFB "))
-
             }
 
 
