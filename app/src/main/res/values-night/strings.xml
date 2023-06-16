@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Taskify</string>
+    <string name="text_about_title">About</string>
+    <string name="text_about_desc">Taskify! With this app you can create, edit, delete and organize your tasks.</string>
+    <string name="text_about_visit_title">Visit</string>
+    <string name="text_about_visit_url"><u>https://github.com/abdulist/Taskify</u></string>
+    <string name="text_app_version">v%s (%d)</string>
+    <string name="important_task">Important Task?</string>
+    <string name="task_name">Task name</string>
     <string name="license">license</string>
     <string name="author">author</string>
+    <string name="koneksi_error">Koneksi error</string>
 </resources>

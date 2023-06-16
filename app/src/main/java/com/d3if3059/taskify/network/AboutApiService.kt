@@ -30,3 +30,4 @@ import retrofit2.http.GET
             return "$BASE_URL$imageId.png"
         }
     }
+enum class ApiStatus { LOADING, SUCCESS, FAILED }

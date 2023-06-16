@@ -9,6 +9,5 @@
     <string name="task_name">Task name</string>
     <string name="license">license</string>
     <string name="author">author</string>
-
-
+    <string name="koneksi_error">Koneksi error</string>
 </resources>
