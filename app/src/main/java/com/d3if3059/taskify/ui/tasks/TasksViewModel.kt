@@ -1,12 +1,17 @@
 package com.d3if3059.taskify.ui.tasks
 
+import android.app.Application
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import androidx.work.ExistingWorkPolicy
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.d3if3059.taskify.data.PreferencesManager
 import com.d3if3059.taskify.data.SortOrder
 import com.d3if3059.taskify.data.Task
 import com.d3if3059.taskify.data.TaskDao
+import com.d3if3059.taskify.network.UpdateWorker
 import com.d3if3059.taskify.ui.ADD_TASK_RESULT_OK
 import com.d3if3059.taskify.ui.EDIT_TASK_RESULT_OK
 import kotlinx.coroutines.channels.Channel
@@ -14,6 +19,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 
 class TasksViewModel @ViewModelInject constructor (
     private val taskDao: TaskDao,
@@ -26,6 +32,18 @@ class TasksViewModel @ViewModelInject constructor (
 
     private val taskEventChannel = Channel<TasksEvent>()
     val tasksEvent = taskEventChannel.receiveAsFlow()
+
+    fun scheduleUpdater(app: Application) {
+        val request = OneTimeWorkRequestBuilder<UpdateWorker>()
+            .setInitialDelay(1, TimeUnit.MINUTES)
+            .build()
+        WorkManager.getInstance(app).enqueueUniqueWork(
+            UpdateWorker.WORK_NAME,
+            ExistingWorkPolicy.REPLACE,
+            request
+        )
+    }
+
 
 
     private val tasksFlow = combine(

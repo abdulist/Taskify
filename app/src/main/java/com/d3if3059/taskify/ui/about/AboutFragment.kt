@@ -83,14 +83,14 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
 
     private fun bind(about: About) {
         binding.apply {
-            author.text = about.author
-            appName.text = about.appName
-            appVersion.text = about.appVersion
-            visitURL.setOnClickListener {
+            binding.author.text = about.author
+            binding.appName.text = about.appName
+            binding.appVersion.text = about.appVersion
+            binding.visitURL.setOnClickListener {
                 launchBrowser(about.visitURL)
             }
-            desc.text = about.desc
-            license.text = about.license
+            binding.desc.text = about.desc
+            binding.license.text = about.license
             Glide.with(logo.context)
                 .load(AboutApi.getAboutUrl(about.imageId))
                 .error(R.drawable.ic_baseline_broken_image_24)

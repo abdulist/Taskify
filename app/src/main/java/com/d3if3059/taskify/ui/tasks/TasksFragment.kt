@@ -35,6 +35,8 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), TasksAdapter.OnItemClic
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.scheduleUpdater(requireActivity().application)
+
         val binding = FragmentTasksBinding.bind(view)
 
         val tasksAdapter = TasksAdapter(this)
