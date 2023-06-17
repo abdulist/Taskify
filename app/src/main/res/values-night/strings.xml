@@ -11,6 +11,8 @@
     <string name="license">license</string>
     <string name="author">author</string>
     <string name="koneksi_error">Koneksi error</string>
-    <string name="channel_name">Updater</string>
-    <string name="channel_desc">Update data hewan otomatis</string>
+    <string name="channel_name">Reminder</string>
+    <string name="channel_desc">Reminding of your Incomplete task</string>
+    <string name="notif_title">Check your Task!</string>
+    <string name="notif_text">Do you have an Incomplete task to do?</string>
 </resources>

@@ -1,11 +1,16 @@
 package com.d3if3059.taskify.ui.tasks
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
@@ -18,6 +23,7 @@ import com.d3if3059.taskify.R
 import com.d3if3059.taskify.data.SortOrder
 import com.d3if3059.taskify.data.Task
 import com.d3if3059.taskify.databinding.FragmentTasksBinding
+import com.d3if3059.taskify.ui.MainActivity
 import com.d3if3059.taskify.util.exhaustive
 import com.d3if3059.taskify.util.onQueryTextChanged
 import com.google.android.material.snackbar.Snackbar
@@ -182,4 +188,5 @@ class TasksFragment : Fragment(R.layout.fragment_tasks), TasksAdapter.OnItemClic
         super.onDestroy()
         searchView.setOnQueryTextListener(null)
     }
+
 }

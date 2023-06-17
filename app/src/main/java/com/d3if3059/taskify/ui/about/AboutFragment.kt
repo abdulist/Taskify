@@ -1,11 +1,16 @@
 package com.d3if3059.taskify.ui.about
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +20,7 @@ import com.d3if3059.taskify.data.About
 import com.d3if3059.taskify.databinding.FragmentAboutBinding
 import com.d3if3059.taskify.network.AboutApi
 import com.d3if3059.taskify.network.ApiStatus
+import com.d3if3059.taskify.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -73,6 +79,11 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
                 binding.visitURL.visibility = View.VISIBLE
                 binding.license.visibility = View.VISIBLE
                 binding.author.visibility = View.VISIBLE
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    requestNotificationPermission()
+                }
+
             }
             ApiStatus.FAILED -> {
                 binding.progressBar.visibility = View.GONE
@@ -100,5 +111,20 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
 
     private fun launchBrowser(url: String) = Intent(Intent.ACTION_VIEW, Uri.parse(url)).also {
         startActivity(it)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    private fun requestNotificationPermission() {
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.POST_NOTIFICATIONS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                MainActivity.PERMISSION_REQUEST_CODE
+            )
+        }
     }
 }

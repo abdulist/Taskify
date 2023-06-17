@@ -4,9 +4,7 @@ import android.app.Application
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import androidx.work.ExistingWorkPolicy
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
+import androidx.work.*
 import com.d3if3059.taskify.data.PreferencesManager
 import com.d3if3059.taskify.data.SortOrder
 import com.d3if3059.taskify.data.Task
@@ -34,17 +32,21 @@ class TasksViewModel @ViewModelInject constructor (
     val tasksEvent = taskEventChannel.receiveAsFlow()
 
     fun scheduleUpdater(app: Application) {
-        val request = OneTimeWorkRequestBuilder<UpdateWorker>()
-            .setInitialDelay(1, TimeUnit.MINUTES)
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
-        WorkManager.getInstance(app).enqueueUniqueWork(
+
+        val request = PeriodicWorkRequestBuilder<UpdateWorker>(1, TimeUnit.DAYS)
+            .setInitialDelay(1, TimeUnit.MINUTES)
+            .setConstraints(constraints)
+            .build()
+
+        WorkManager.getInstance(app).enqueueUniquePeriodicWork(
             UpdateWorker.WORK_NAME,
-            ExistingWorkPolicy.REPLACE,
+            ExistingPeriodicWorkPolicy.REPLACE,
             request
         )
     }
-
-
 
     private val tasksFlow = combine(
         searchQuery.asFlow(),
